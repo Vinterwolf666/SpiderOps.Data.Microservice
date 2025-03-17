@@ -13,10 +13,10 @@ namespace Data.Microservice.App
 
         List<CData> GetAllDataByCustomerID(int id);
 
-        Task<string> NewCustomerData(CData c);
+        Task<string> NewCustomerData(CData c, string email);
 
         Task<string> UpDateCustomerData(CData c);
 
-        Task<string> DeleteCustomerData(int id);
+        Task<string> DeleteCustomerData(int id, string email, string text_message);
     }
 }

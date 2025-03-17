@@ -13,6 +13,7 @@ namespace Data.Microservice.Domain
     {
         [Key]
         public int CUSTOMERS_ID { get; set; }
+
         public string FIRSTNAME { get; set; }
 
         public string SECONDNAME { get; set; }

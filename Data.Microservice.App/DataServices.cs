@@ -19,9 +19,9 @@ namespace Data.Microservice.App
 
         }
 
-        public Task<string> DeleteCustomerData(int id)
+        public Task<string> DeleteCustomerData(int id, string email, string text_message)
         {
-            var result = _repository.DeleteCustomerData(id);
+            var result = _repository.DeleteCustomerData(id, email, text_message);
 
             return result;
         }
@@ -40,9 +40,9 @@ namespace Data.Microservice.App
             return result;
         }
 
-        public Task<string> NewCustomerData(CData c)
+        public async Task<string> NewCustomerData(CData c, string email)
         {
-            var result = _repository.NewCustomerData(c);
+            var result = await _repository.NewCustomerData(c,email);
 
             return result;
         }

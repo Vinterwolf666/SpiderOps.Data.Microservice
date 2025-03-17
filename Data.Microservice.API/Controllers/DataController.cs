@@ -58,15 +58,16 @@ namespace Data.Microservice.API.Controllers
 
         [HttpPost]
         [Route("newAccountData")]
-        public async Task<ActionResult<string>> NewAccountData(CData c)
+        public async Task<ActionResult<string>> NewAccountData([FromQuery] CData c, [FromQuery] string email)
         {
 
             try
             {
-                var result = await _services.NewCustomerData(c);
+                var result = await _services.NewCustomerData(c,email);
 
                 var producer = new RabbitMQProducer();
                 await producer.NotifyAccountCreationStageCompleted();
+
 
                 return Ok(result);
 
@@ -83,14 +84,13 @@ namespace Data.Microservice.API.Controllers
 
         [HttpDelete]
         [Route("removeAnAccount")]
-        [Authorize]
-        public async Task<ActionResult<string>> RemoveAnAccount(int id)
+        public async Task<ActionResult<string>> RemoveAnAccount(int id, string email, string text_message)
         {
 
 
             try
             {
-                var result = await _services.DeleteCustomerData(id);
+                var result = await _services.DeleteCustomerData(id, email, text_message);
 
                 return Ok(result);
 
