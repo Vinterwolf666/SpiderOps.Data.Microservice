@@ -1,4 +1,5 @@
-﻿using Data.Microservice.App;
+﻿using Customer.Notify.Microservice.APP;
+using Data.Microservice.App;
 using Data.Microservice.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,11 +15,13 @@ namespace Data.Microservice.Infrastructure
     {
 
         private readonly DataDbContext _dbContext;
+        private readonly INotifyRepository _notifyRepository;
 
-        public DataRepository(DataDbContext dbContext)
+        public DataRepository(DataDbContext dbContext, INotifyRepository notifyRepository)
         {
 
             _dbContext = dbContext;
+            _notifyRepository = notifyRepository;
 
         }
 
@@ -26,27 +29,21 @@ namespace Data.Microservice.Infrastructure
         public async Task<string> DeleteCustomerData(int id, string email, string text_message)
         {
             var dataID = await _dbContext.DataDomain.FirstOrDefaultAsync(a => a.CUSTOMERS_ID == id);
-            string apiUrl = $"http://34.42.106.100/Customer.Notify.Microservice.API.Notify/SendARemoveAccountNotification?email={email}&text_message={text_message}&id={id}";
-            using (HttpClient client = new HttpClient())
 
-                if (dataID != null)
+            if (dataID != null)
             {
-
                 
-                HttpResponseMessage response = await client.PostAsync(apiUrl,null);
-                response.EnsureSuccessStatusCode(); 
+                string notificationResult = await _notifyRepository.SendAccountRemovedNotification(email, text_message, id);
 
                 _dbContext.DataDomain.Remove(dataID);
-
                 await _dbContext.SaveChangesAsync();
 
-                return "Account removed successfully, and notification sent";
+                return $"Account removed successfully. Notification result: {notificationResult}";
             }
             else
             {
                 return "Invalid account, does not exist";
             }
-
         }
 
         public List<CData> GetAllData()
@@ -65,32 +62,17 @@ namespace Data.Microservice.Infrastructure
 
         public async Task<string> NewCustomerData(CData c, string email)
         {
-            // Guardar los datos en la base de datos
             await _dbContext.DataDomain.AddAsync(c);
             await _dbContext.SaveChangesAsync();
 
-            // Obtener el ID del cliente
             var id = c.CUSTOMERS_ID;
 
-            // Construir la URL del endpoint con parámetros en query
-            string apiUrl = $"http://34.42.106.100/Customer.Notify.Microservice.API.Notify/SendACreationAccountNotification?email={email}&text_message=account_creation&id={id}";
+            
+            string notificationResult = await _notifyRepository.SendAccountCreationNotification(email, "account_creation", id);
 
-            using (HttpClient client = new HttpClient())
-            {
-                try
-                {
-                    // Enviar la solicitud POST sin cuerpo porque el endpoint usa query parameters
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, null);
-                    response.EnsureSuccessStatusCode(); // Lanza una excepción si hay error en la respuesta
-
-                    return "Account created successfully. Notification sent.";
-                }
-                catch (HttpRequestException ex)
-                {
-                    return $"Account created, but failed to send notification: {ex.Message}";
-                }
-            }
+            return $"Account created successfully. Notification result: {notificationResult}";
         }
+
 
 
         public async Task<string> UpDateCustomerData(CData c)
