@@ -1,5 +1,6 @@
 ﻿using Customer.Notify.Microservice.APP;
 using Data.Microservice.App;
+using Data.Microservice.APP;
 using Data.Microservice.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,25 +16,25 @@ namespace Data.Microservice.Infrastructure
     {
 
         private readonly DataDbContext _dbContext;
-        private readonly INotifyRepository _notifyRepository;
+        private readonly INotifyServices _n;
 
-        public DataRepository(DataDbContext dbContext, INotifyRepository notifyRepository)
+        public DataRepository(DataDbContext dbContext, INotifyServices notifyRepository)
         {
 
             _dbContext = dbContext;
-            _notifyRepository = notifyRepository;
+            _n = notifyRepository;
 
         }
 
 
-        public async Task<string> DeleteCustomerData(int id, string email, string text_message)
+        public async Task<string> DeleteCustomerData(string email, string subject, string message, int customerId)
         {
-            var dataID = await _dbContext.DataDomain.FirstOrDefaultAsync(a => a.CUSTOMERS_ID == id);
+            var dataID = await _dbContext.DataDomain.FirstOrDefaultAsync(a => a.CUSTOMERS_ID == customerId);
 
             if (dataID != null)
             {
                 
-                string notificationResult = await _notifyRepository.SendAccountRemovedNotification(email, text_message, id);
+                string notificationResult = await _n.SendNotification(email, subject,  message, customerId);
 
                 _dbContext.DataDomain.Remove(dataID);
                 await _dbContext.SaveChangesAsync();
@@ -60,7 +61,7 @@ namespace Data.Microservice.Infrastructure
             return data;
         }
 
-        public async Task<string> NewCustomerData(CData c, string email)
+        public async Task<string> NewCustomerData(CData c, string email, string subject, string message, int customerId)
         {
             await _dbContext.DataDomain.AddAsync(c);
             await _dbContext.SaveChangesAsync();
@@ -68,7 +69,7 @@ namespace Data.Microservice.Infrastructure
             var id = c.CUSTOMERS_ID;
 
             
-            string notificationResult = await _notifyRepository.SendAccountCreationNotification(email, "account_creation", id);
+            string notificationResult = await _n.SendNotification(email, subject, message, customerId);
 
             return $"Account created successfully. Notification result: {notificationResult}";
         }

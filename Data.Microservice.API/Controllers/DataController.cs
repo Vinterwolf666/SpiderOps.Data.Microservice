@@ -37,7 +37,6 @@ namespace Data.Microservice.API.Controllers
         
         [HttpPost]
         [Route("AllDataByID")]
-        [Authorize]
         public ActionResult<List<CData>> AllDataByID(int id)
         {
             try
@@ -58,12 +57,12 @@ namespace Data.Microservice.API.Controllers
 
         [HttpPost]
         [Route("newAccountData")]
-        public async Task<ActionResult<string>> NewAccountData([FromQuery] CData c, [FromQuery] string email)
+        public async Task<ActionResult<string>> NewAccountData([FromQuery] CData c, [FromQuery] string email, [FromQuery] string subject, [FromQuery] string message, [FromQuery] int customerId)
         {
 
             try
             {
-                var result = await _services.NewCustomerData(c,email);
+                var result = await _services.NewCustomerData(c,  email,  subject, message, customerId);
 
                 var producer = new RabbitMQProducer();
                 await producer.NotifyAccountCreationStageCompleted();
@@ -84,13 +83,13 @@ namespace Data.Microservice.API.Controllers
 
         [HttpDelete]
         [Route("removeAnAccount")]
-        public async Task<ActionResult<string>> RemoveAnAccount(int id, string email, string text_message)
+        public async Task<ActionResult<string>> RemoveAnAccount([FromQuery] string email, [FromQuery] string subject, [FromQuery] string message, [FromQuery] int customerId)
         {
 
 
             try
             {
-                var result = await _services.DeleteCustomerData(id, email, text_message);
+                var result = await _services.DeleteCustomerData(email, subject, message, customerId);
 
                 return Ok(result);
 
@@ -103,12 +102,11 @@ namespace Data.Microservice.API.Controllers
 
         [HttpPut]
         [Route("updateAnAccount")]
-        [Authorize]
-        public async Task<ActionResult<string>> UpdateAnAccount(CData c)
+        public async Task<ActionResult<string>> UpdateAnAccount(CData c, string email)
         {
             try
             {
-                var result = await _services.UpDateCustomerData(c);
+                var result = await _services.UpdateCustomerData(c,email);
 
                 return Ok(result);
 

@@ -11,6 +11,7 @@ COPY ["Data.Microservice.API/Data.Microservice.API.csproj", "Data.Microservice.A
 COPY ["Data.Microservice.App/Data.Microservice.App.csproj", "Data.Microservice.App/"]
 COPY ["Data.Microservice/Data.Microservice.Domain.csproj", "Data.Microservice/"]
 COPY ["Data.Microservice.Infrastructure/Data.Microservice.Infrastructure.csproj", "Data.Microservice.Infrastructure/"]
+COPY ["Data.Microservice.Service/Data.Microservice.Service.csproj", "Data.Microservice.Service/"]
 RUN dotnet restore "Data.Microservice.API/Data.Microservice.API.csproj"
 COPY . .
 WORKDIR "/src/Data.Microservice.API"

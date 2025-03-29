@@ -157,3 +157,9 @@ C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.
 C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\System.IO.Pipelines.dll
 C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\System.Threading.Channels.dll
 C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\System.Threading.RateLimiting.dll
+C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\MailKit.dll
+C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\MimeKit.dll
+C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\NETCore.MailKit.dll
+C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\BouncyCastle.Crypto.dll
+C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\Data.Microservice.Service.dll
+C:\Users\juanl\Documents\SpiderOps\Customer.Data.Microservice\Data.Microservice.API\bin\Debug\net7.0\Data.Microservice.Service.pdb

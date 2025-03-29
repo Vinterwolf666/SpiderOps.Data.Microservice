@@ -3,7 +3,9 @@ using Customer.Identity.Microservice.API.Services;
 using Customer.Notify.Microservice.APP;
 using Customer.Notify.Microservice.Infrastructure;
 using Data.Microservice.App;
+using Data.Microservice.APP;
 using Data.Microservice.Infrastructure;
+using Data.Microservice.Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Microservice.API

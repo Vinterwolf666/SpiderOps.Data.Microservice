@@ -1,4 +1,5 @@
 ﻿using Data.Microservice.Domain;
+using NETCore.MailKit.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,14 @@ namespace Data.Microservice.App
 {
     public interface IDataServices
     {
-        List<CData>  GetAllData();
+        Task<string> DeleteCustomerData(string email, string subject, string message, int customerId);
+
+        List<CData> GetAllData();
 
         List<CData> GetAllDataByCustomerID(int id);
 
-        Task<string> NewCustomerData(CData c, string email);
+        Task<string> NewCustomerData(CData c, string email, string subject, string message, int customerId);
 
-        Task<string> UpDateCustomerData(CData c);
-
-        Task<string> DeleteCustomerData(int id, string email, string text_message);
+        Task<string> UpdateCustomerData(CData c, string email);
     }
 }

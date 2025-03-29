@@ -9,23 +9,14 @@ namespace Customer.Notify.Microservice.APP
 {
     public interface INotifyServices
     {
-        List<Notification> AllNotifications();
+        Task<string> SendNotification(string email, string subject, string message, int customerId);
 
-        List<Notification> AllNotificationsByID(int id);
+        string SendEmail(string to, string subject, string body, string returnMessage);
 
-        Task<string> SendAccountCreationNotification(string email, string text_message, int id);
+        Task<List<Notification>> AllNotificationsAsync();
 
-        Task<string> SendRecoveyPassNotification(string email, string textMessage,int id);
+        Task<List<Notification>> AllNotificationsByIDAsync(int id);
 
-        Task<string> SendDeploymentNotification(string email, string text_message, int id);
-
-        Task<string> SendRemovedDeploymentNotification(string email, string text_message, int id);
-
-        Task<string> SendAccountRemovedNotification(string email, string text_message, int id);
-
-        Task<string> SendUpdateAccountNotification(string email, string text_message, int id);
-
-        Task<string> SendInfrastructureNotification(string email, string text_message, int id);
-        Task<string> DeleteByID(int id);
+        Task<bool> DeleteByIDAsync(int id);
     }
 }

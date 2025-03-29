@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "azslJ6XR4ip6coXpCkUbMU7GJo/bteCzgQ6hIQrSSNSnK+c1BkFnIjloU0gz4CDQlXhxA7BwT4lq+tiGttsI5g==",
+  "dgSpecHash": "04Tg9EiVmkxWRj9ie48c4iU+CTo5jpYU3Is3npPuDRPFg3H+Zo8cQsTbyX/2lIwl1pHIgjkPJGbOjEQCocF/SA==",
   "success": true,
   "projectFilePath": "C:\\Users\\juanl\\Documents\\SpiderOps\\Customer.Data.Microservice\\Data.Microservice.Infrastructure\\Data.Microservice.Infrastructure.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\juanl\\.nuget\\packages\\mailkit\\3.2.0\\mailkit.3.2.0.nupkg.sha512",
     "C:\\Users\\juanl\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.20\\microsoft.entityframeworkcore.7.0.20.nupkg.sha512",
     "C:\\Users\\juanl\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.20\\microsoft.entityframeworkcore.abstractions.7.0.20.nupkg.sha512",
     "C:\\Users\\juanl\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.20\\microsoft.entityframeworkcore.analyzers.7.0.20.nupkg.sha512",
@@ -14,7 +15,12 @@
     "C:\\Users\\juanl\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "C:\\Users\\juanl\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\juanl\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
-    "C:\\Users\\juanl\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512"
+    "C:\\Users\\juanl\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\juanl\\.nuget\\packages\\mimekit\\3.2.0\\mimekit.3.2.0.nupkg.sha512",
+    "C:\\Users\\juanl\\.nuget\\packages\\netcore.mailkit\\2.1.0\\netcore.mailkit.2.1.0.nupkg.sha512",
+    "C:\\Users\\juanl\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
+    "C:\\Users\\juanl\\.nuget\\packages\\system.formats.asn1\\6.0.0\\system.formats.asn1.6.0.0.nupkg.sha512",
+    "C:\\Users\\juanl\\.nuget\\packages\\system.security.cryptography.pkcs\\6.0.0\\system.security.cryptography.pkcs.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

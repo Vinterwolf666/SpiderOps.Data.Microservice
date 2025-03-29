@@ -9,14 +9,12 @@ namespace Data.Microservice.App
 {
     public interface IDataRepository
     {
+        Task<string> DeleteCustomerData(string email, string subject, string message, int customerId);
         List<CData> GetAllData();
-
         List<CData> GetAllDataByCustomerID(int id);
 
-        Task<string> NewCustomerData(CData c, string email);
+        Task<string> NewCustomerData(CData c, string email, string subject, string message, int customerId);
 
         Task<string> UpDateCustomerData(CData c);
-
-        Task<string> DeleteCustomerData(int id, string email, string text_message);
     }
 }
