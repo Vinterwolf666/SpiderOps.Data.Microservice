@@ -8,11 +8,12 @@ on:
     branches:
       - master
   schedule:
-    - cron: '0 3 * * 1' # Corre cada lunes a las 3 AM UTCsss
+    - cron: '0 3 * * 1' # Corre cada lunes a las 3 AM UTC
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -42,6 +43,10 @@ jobs:
           name: gitleaks-report
           path: gitleaks-report.json
 
+      # --- Build del proyecto para análisis con SonarCloud ---
+      - name: Build the solution
+        run: dotnet build --no-restore --configuration Release
+
       # --- Análisis de calidad con SonarCloud ---
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
@@ -52,9 +57,10 @@ jobs:
       - name: Run SonarCloud analysis
         uses: SonarSource/sonarqube-scan-action@v5
         env:
-          SONAR_TOKEN: 22275d66ec9a13c7c5810f1fa423675358c9a4ad
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
             -Dsonar.projectKey=quality-ms_integration-ms
             -Dsonar.organization=quality-ms
             -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.verbose=true
